@@ -1,1 +1,434 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Լուսեի Մկրտություն - Հրավիրատոմս</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .invitation-container {
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '✝';
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .date-section {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .date-section h2 {
+            color: #667eea;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .date-display {
+            font-size: 28px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .schedule {
+            margin: 40px 0;
+        }
+
+        .schedule h2 {
+            text-align: center;
+            color: #667eea;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 120px;
+            margin-right: 25px;
+        }
+
+        .time-box .hour {
+            font-size: 32px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-box .label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .event-details h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .event-details p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .godparent-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+            border: 2px dashed #667eea;
+        }
+
+        .godparent-section h3 {
+            color: #667eea;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .godparent-name {
+            font-size: 24px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .rsvp-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .rsvp-section h2 {
+            color: #667eea;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+        }
+
+        .rsvp-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-no:hover {
+            background: #d0d0d0;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .decorative-cross {
+            text-align: center;
+            font-size: 48px;
+            color: #667eea;
+            margin: 20px 0;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .event-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .time-box {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .rsvp-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px 20px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .countdown-item .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .countdown-item .label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-container">
+        <div class="header">
+            <h1>Լուսե</h1>
+            <p>Մկրտության հրավիրատոմս</p>
+        </div>
+
+        <div class="content">
+            <div class="welcome-text">
+                <p>Սիրելի հյուրեր,</p>
+                <p>Մենք ուրախ կլինենք, եթե դուք կիսեք մեզ հետ մեր կյանքի ամենահուզիչ և կարևոր պահերից մեկը</p>
+            </div>
+
+            <div class="decorative-cross">✝</div>
+
+            <div class="date-section">
+                <h2>Մկրտության օրը</h2>
+                <div class="date-display">Հոկտեմբերի 22</div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="number" id="days">00</span>
+                    <span class="label">ր</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="hours">00</span>
+                    <span class="label">ամ</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="minutes">00</span>
+                    <span class="label">ոպե</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="number" id="seconds">00</span>
+                    <span class="label">Վրկ</span>
+                </div>
+            </div>
+
+            <div class="schedule">
+                <h2>Օրվա ծրագիր</h2>
+                
+                <div class="event-item">
+                    <div class="time-box">
+                        <span class="hour">15:00</span>
+                        <span class="label">ամ</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Մկրտության արարողություն</h3>
+                        <p>կեղեցի / Մկրտարան</p>
+                    </div>
+                </div>
+
+                <div class="event-item">
+                    <div class="time-box">
+                        <span class="hour">17:30</span>
+                        <span class="label">Ժամ</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Տոնական ընդունելություն</h3>
+                        <p>Հանդիսությունների սրահ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="godparent-section">
+                <h3>Մկրտության եկեղեցին</h3>
+                <div class="godparent-name">մայր Աթոռ</div>
+            </div>
+
+            <div class="rsvp-section">
+                <h2>Խնդրում ենք հաստատել Ձեր ներկայությունը</h2>
+                <div class="rsvp-buttons">
+                    <button class="btn btn-yes" onclick="rsvp(true)">Սիրով ներկա կլինենք</button>
+                    <button class="btn btn-no" onclick="rsvp(false)">Ցավոք՝ ներկա չենք լինի</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Սպասում ենք Ձեզ այս ուրախ օրը մեր հետ լինելու համար</p>
+            <p style="margin-top: 15px; font-size: 14px; color: #999;">
+                Հարցերի դեպքում կապվեք մեզ հետ
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('October 22, 2024 15:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // RSVP Function
+        function rsvp(attendance) {
+            if (attendance) {
+                alert('Շնորհակալություն! Ձեր պատասխանը գրանցված է:');
+            } else {
+                alert('Ցավում ենք, որ չեք կարողանա ներկա լինել:');
+            }
+        }
+
+        // Smooth scroll animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
